@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, View ,Text, TouchableOpacity} from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useTheme } from '~/hooks/theme'
 import { colors } from '~/theme'
 import { styles } from './styles'
 
@@ -15,15 +16,17 @@ interface Props{
 }
 
 export const ModalRemoveItem: React.FC<Props> = ({isVisible, onClose, confirm, item}) => {
+  const {theme} = useTheme()
+
   return (
     <Modal visible={isVisible} transparent={true} animationType='fade' >
       <View 
         style={styles.container}>
 
-        <View style={styles.content}>
+        <View style={{...styles.content,backgroundColor:theme.background}}>
           <View style={styles.contentText}>
-            <Text style={styles.title}>Remover Item</Text>
-            <Text style={styles.subtitle}>Se deseja remover o item do carrinho clique em prosseguir.</Text>
+            <Text style={{...styles.title,color:theme.titleModal}}>Remover Item</Text>
+            <Text style={{...styles.subtitle, color:theme.textModal}}>Se deseja remover o item do carrinho clique em prosseguir.</Text>
           </View>
           <View>
             <TouchableOpacity 

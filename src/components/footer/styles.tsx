@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     width:'100%',
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor:colors.light.background,
     borderTopLeftRadius:30,
     borderTopRightRadius:30,
     ...Platform.select({

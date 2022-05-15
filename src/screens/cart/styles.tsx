@@ -61,12 +61,13 @@ export const styles = StyleSheet.create({
   title:{
     fontSize:RFValue(14),
     fontWeight:'bold',
-    color:colors.light.secondaryText
+    color:colors.light.secondaryText,
   },
   myCartText:{
     fontSize: RFValue(24), 
     fontWeight: 'bold',
-    paddingLeft:RFValue(19) 
+    paddingLeft:RFValue(19),
+    marginBottom:RFValue(15)
   },
   buttonBack:{
     position:'absolute',

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
+import { useTheme } from '~/hooks/theme'
 
 import { colors } from '~/theme'
 import { styles } from './styles'
@@ -13,12 +14,12 @@ interface Props extends TouchableOpacityProps{
 }
 
 export const ButtonSelect: React.FC<Props> = ({categorieName,selected,...rest}) => {
-  // selected === categorieName ? styles.selected : styles.unSelected
+  const {theme} = useTheme()
   return (
     <TouchableOpacity 
       {...rest}
       activeOpacity={0.7}
-      style={selected === categorieName ? styles.selected : styles.unSelected}>
+      style={selected === categorieName ? {...styles.selected,backgroundColor:theme.main }: styles.unSelected}>
 
       <Text style={selected === categorieName ? styles.textSelected : styles.textUnSelected}>{categorieName}</Text>
     </TouchableOpacity>)

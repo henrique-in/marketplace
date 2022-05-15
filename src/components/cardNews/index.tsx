@@ -6,6 +6,7 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { colors } from '~/theme'
 
 import { styles } from './styles'
+import { useTheme } from '~/hooks/theme'
 
 interface itemProps{
     id: number
@@ -25,6 +26,7 @@ interface Props{
 const add = require('~/icons/addPurple.png')
 
 export const CardNews: React.FC<Props> = ({data, onPress}) => {
+  const {theme} = useTheme()
   return (
     <View  style={styles.container} >
       <View style={styles.contentImage}>
@@ -33,13 +35,13 @@ export const CardNews: React.FC<Props> = ({data, onPress}) => {
 
           source={{uri:data?.image}}/>
       </View>
-      <Text style={styles.category}>{data?.category}</Text>
-      <Text style={styles.title}>{data?.title}</Text>
-      <Text style={styles.description}>
+      <Text style={{...styles.category,color:theme.main}}>{data?.category}</Text>
+      <Text style={{...styles.title, color:theme.primaryText}}>{data?.title?.length > 20 ? `${data?.title.substr(0, 20)}...` : data?.title}</Text>
+      <Text style={{...styles.description,color:theme.secondaryText}}>
         {data?.description?.length > 53 ? `${data?.description.substr(0, 53)}...` : data?.description}
       </Text>
       <View style={styles.contentButton}>
-        <Text style={styles.price}>${data?.price}</Text>
+        <Text style={{...styles.price,color:theme.main}}>${data?.price.toFixed(2)}</Text>
         <TouchableOpacity 
           activeOpacity={0.4}
           style={styles.button } 

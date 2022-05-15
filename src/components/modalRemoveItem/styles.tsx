@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   content:{
     width:'80%',
     height:RFValue(170),
-    backgroundColor:colors.light.background,
+   
     borderRadius:15,
   
   },

@@ -6,6 +6,7 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { colors } from '~/theme'
 
 import { styles } from './styles'
+import { useTheme } from '~/hooks/theme'
 
 interface itemProps{
     id: number
@@ -25,6 +26,9 @@ const add = require('~/icons/addPurple.png')
 
 
 export const CardList: React.FC<Props> = ({data, onPress}) => {
+
+  const {theme} = useTheme()
+
   return (
     <View  style={styles.container} >
       <View style={styles.contentImage}>
@@ -42,10 +46,10 @@ export const CardList: React.FC<Props> = ({data, onPress}) => {
           <Image  style={{width:12,height:12}} source={add}/>
         </TouchableOpacity>
       </View>
-      <Text style={styles.category}>{data?.category}</Text>
-      <Text style={styles.title}>{data?.title}</Text>
+      <Text style={{...styles.category, color:theme.main}}>{data?.category}</Text>
+      <Text style={{...styles.title,color:theme.primaryText}}>{data?.title?.length > 20 ? `${data?.title.substr(0, 20)}...` : data?.title}</Text>
     
-      <Text style={styles.price}>${data?.price}</Text>
+      <Text style={{...styles.price,color:theme.main}}>${data?.price}</Text>
      
 
     </View>

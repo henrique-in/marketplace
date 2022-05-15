@@ -8,11 +8,12 @@ import { CommonActions, useNavigation } from '@react-navigation/native'
 import { useCart } from '~/hooks/cart'
 import { InfoNotFound } from './components/infoNotFound'
 import { ListItemCart } from '~/components'
+import { useTheme } from '~/hooks/theme'
 
 
 export const Cart: React.FC = () => {
   const navigation = useNavigation()
-
+  const {theme} = useTheme()
   const {cart, AddProduct, RemoveProduct} = useCart()
 
   const totalCart =  cart.map((item:any) => item?.total).reduce((prev, curr) => prev + curr, 0)
@@ -33,19 +34,19 @@ export const Cart: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container,backgroundColor:theme.background}}>
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.buttonBack}
           onPress={()=> navigation.goBack()}
         >
-          <Entypo  name="chevron-small-left" size={RFValue(30)} color={colors.light.secondaryText} />
+          <Entypo  name="chevron-small-left" size={RFValue(30)} color={theme.secondaryText} />
         </TouchableOpacity>
         
-        <Text style={styles.title}>CARRINHO</Text>
+        <Text style={{...styles.title,color:theme.secondaryText}}>CARRINHO</Text>
       </View>
       <Text 
-        style={styles.myCartText}>Meu Carrinho</Text>
+        style={{...styles.myCartText,color:theme.secondaryText}}>Meu Carrinho</Text>
       
       {
         cart.length < 1 && <InfoNotFound/>
@@ -54,16 +55,16 @@ export const Cart: React.FC = () => {
       {cart.length > 0 &&
      <>
        <FlatList
-         style={{paddingHorizontal:RFValue(19)}}
+         style={{paddingHorizontal:RFValue(19),paddingBottom:RFValue(10)}}
          data={cart}
          renderItem={renderItem}
       
        />
 
      
-       <View style={styles.contentValueCart}>
-         <Text style={styles.valueText}>Total:</Text>
-         <Text style={styles.valueText}>${totalCart.toFixed(2)}</Text>
+       <View style={{...styles.contentValueCart}}>
+         <Text style={{...styles.valueText,color:theme.primaryText}}>Total:</Text>
+         <Text style={{...styles.valueText,color:theme.primaryText}}>${totalCart.toFixed(2)}</Text>
        </View>
        <View style={styles.contentFooter}>
          <TouchableOpacity 

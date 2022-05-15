@@ -49,20 +49,19 @@ export const styles = StyleSheet.create({
     right: 18,
   },
   category:{
-    color:colors.light.main,
     fontWeight:'bold',
-    fontSize:RFValue(9),
+    fontSize:RFValue(10),
 
   },
   title:{
-    color:colors.light.primaryText,
+    
     fontWeight:'bold',
     fontSize:RFValue(14),
     width:'100%' 
   },
   
   price:{
-    color:colors.light.main,
+    
     fontWeight:'bold',
     fontSize:RFValue(20),
     marginTop:10,

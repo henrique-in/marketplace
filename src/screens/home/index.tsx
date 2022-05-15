@@ -7,12 +7,13 @@ import {
   ListRenderItemInfo,
   ActivityIndicator,
   ScrollView,
-  TouchableOpacity,
+  useColorScheme,
 } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 
 import { CardList, CardNews, ButtonSelect, CartIcon, Footer } from '~/components'
 import { useCart } from '~/hooks/cart'
+import { useTheme } from '~/hooks/theme'
 import { UserRequest } from '~/models/requests'
 import { colors } from '~/theme'
 
@@ -21,7 +22,8 @@ import { styles } from './styles'
 
 export const Home: React.FC = () => {
   const {cart, AddProduct} = useCart()
-
+  const {theme} = useTheme()
+ 
   const [categories, setCategories] = useState([])
   const [categorySelected, setCategorySelected] = useState('')
 
@@ -36,6 +38,8 @@ export const Home: React.FC = () => {
       console.log(error)
     }
   }
+
+
 
   const loadProducts = async () => {
     try {
@@ -77,21 +81,21 @@ export const Home: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container,backgroundColor:theme.background}}>
       <View style={styles.header}>
-        <Text style={{ fontSize: RFValue(25), fontWeight: 'bold' }}>
+        <Text style={{ ...styles.title, color:theme.primaryText }}>
             Produtos
         </Text>
         <CartIcon/>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ backgroundColor: colors.light.background }}
+        
       >
      
 
         <View style={{ paddingLeft: RFValue(19) }}>
-          <Text style={{ fontSize: RFValue(10), fontWeight: 'bold', color:colors.light.secondaryText }}>
+          <Text style={{ ...styles.subtitle, color:theme.secondaryText }}>
             FILTRAR CATEGORIA
           </Text>
 
@@ -99,7 +103,7 @@ export const Home: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             ListFooterComponent={() =>
               categories.length === 0 ? (
-                <ActivityIndicator color={colors.light.main} />
+                <ActivityIndicator color={theme.main} />
               ) : null
             }
             data={categories}
@@ -112,9 +116,9 @@ export const Home: React.FC = () => {
         <View style={{ paddingLeft: RFValue(19) }}>
           <Text
             style={{
-              fontSize: RFValue(25),
-              fontWeight: 'bold',
-              marginVertical: RFValue(15),
+              ...styles.title,
+              color:theme.primaryText,
+              marginVertical: RFValue(15)
             }}
           >
             Novidades
@@ -124,7 +128,7 @@ export const Home: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             ListFooterComponent={() =>
               newProducts.length === 0 ? (
-                <ActivityIndicator color={colors.light.main} />
+                <ActivityIndicator color={theme.main} />
               ) : null
             }
             data={newProducts}
@@ -135,32 +139,18 @@ export const Home: React.FC = () => {
         </View>
 
         <View
-          style={{
-            backgroundColor: 'rgba(235, 235, 237, 1)',
-            height: 1,
-            width: '100%',
-            marginVertical: RFValue(5),
-          }}
+          style={{...styles.divider,backgroundColor:theme.gray}}
         />
 
         <View style={{ paddingHorizontal: RFValue(19), width: '100%' }}>
           <Text
-            style={{
-              fontSize: RFValue(25),
-              fontWeight: 'bold',
-              marginVertical: RFValue(10),
-            }}
+            style={{...styles.title,marginBottom: RFValue(10),color:theme.primaryText}}
           >
             Listagem
           </Text>
 
           <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              width: '105%',
-              justifyContent: 'space-between',
-            }}
+            style={styles.contentList}
           >
             {newProducts.length === 0 ? (
               <ActivityIndicator color={colors.light.main} />

@@ -1,7 +1,6 @@
 
 import React, {
   createContext,
-  useCallback,
   useState,
   useContext,
   useEffect,
@@ -37,11 +36,11 @@ export const CartProvider: React.FC<Props> = ({children}) => {
   
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
-      // const user = await AsyncStorage.getItem('@PolliApp:user')
+      const cartData = await AsyncStorage.getItem('@MarketPlace:cart')
   
-      // if (user) {
-      //     setData({user: JSON.parse(user)})
-      // }
+      if (cartData) {
+        setData(JSON.parse(cartData))
+      }
   
       setLoading(false)
     }
@@ -51,10 +50,12 @@ export const CartProvider: React.FC<Props> = ({children}) => {
 
 
  
-
+  const  order= (a: { id: number },b: { id: number }) =>{
+    return a.id - b.id
+  }
   const AddProduct = async(item: any) => {
     const aux = {...item, quantity: 1, total: item.price}
-    // console.log(aux)
+
     if(data.some((e: { id: any }) => e.id === aux.id)){
       const filter = data.filter((d: { id: any }) => d.id === aux.id)
       const otherItems = data.filter((d: { id: any })=> d.id !== aux.id)
@@ -63,13 +64,13 @@ export const CartProvider: React.FC<Props> = ({children}) => {
       const resultSome = {...aux, quantity:someQuantity, total: aux.price*someQuantity}
       
       const result = [...otherItems,resultSome]
-    
-      return setData(result.sort((a,b) => a.id - b.id))
+      await AsyncStorage.setItem('@MarketPlace:cart',JSON.stringify(result.sort(order)))
+      return setData(result.sort(order))
       
     }
     const array = [...data, aux]
-  
-    return setData(array.sort((a,b) => a.id - b.id))
+    await AsyncStorage.setItem('@MarketPlace:cart',JSON.stringify(array.sort(order)))
+    return setData(array.sort(order))
   }
   
   const toogleModalRemove = (item: any) => {
@@ -84,11 +85,14 @@ export const CartProvider: React.FC<Props> = ({children}) => {
 
       const result = [...otherItems, aux]
 
-      return setData(result.sort((a,b) => a.id - b.id))
+      await AsyncStorage.setItem('@MarketPlace:cart',JSON.stringify(result.sort(order)))
+
+      return setData(result.sort(order))
     }
     if(item.quantity === 1 && modalRemove !== null){
       
       const otherItems = data.filter((d: { id: any })=> d.id !== item.id)
+      await AsyncStorage.setItem('@MarketPlace:cart',JSON.stringify(otherItems.sort(order)))
       setData(otherItems)
       return toogleModalRemove(null)
        
@@ -101,6 +105,7 @@ export const CartProvider: React.FC<Props> = ({children}) => {
 
 
   const ResetCart = async() =>{
+    await AsyncStorage.removeItem('@MarketPlace:cart')
     setData([])
   }
   
