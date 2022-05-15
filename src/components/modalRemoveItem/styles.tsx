@@ -4,26 +4,25 @@ import { colors } from '~/theme'
 
 export const styles = StyleSheet.create({
   container:{
-    width:'100%', 
-    backgroundColor:'#ece9fe',
-    borderRadius:15,
-    flexDirection:'row',
+    flex:1,
+    backgroundColor:colors.light.backgroundModal,
     alignItems:'center',
-    justifyContent:'space-between',
-    paddingVertical:RFValue(14),
-    paddingHorizontal:RFValue(14),
-    marginBottom:RFValue(10)
+    justifyContent:'center'
   },
   content:{
     width:'80%',
     height:RFValue(170),
     backgroundColor:colors.light.background,
     borderRadius:15,
-    justifyContent:'center',
-    alignItems:'center'
+  
+  },
+  contentText:{
+    flex:1, 
+    justifyContent:'space-evenly',
+    alignItems:'center',
+    paddingHorizontal:10
   },
   contentImage:{
-
     ...Platform.select({
       android: {
         elevation: 3,
@@ -46,32 +45,26 @@ export const styles = StyleSheet.create({
     marginRight:RFValue(5)
   },
   title:{
-
+    fontSize:RFValue(15),
     fontWeight:'bold',
-    fontSize:RFValue(13)
-  
+    color:colors.light.titleModal
   },
-  removeButton:{
-    backgroundColor:colors.light.background,
-    width: RFValue(40),
-    height:RFValue(25) ,
-    borderWidth:1,
-    borderColor:colors.light.gray,
-    borderBottomLeftRadius:20,
-    borderTopLeftRadius:20,
-    alignItems:'center',
-    justifyContent:'center'
+  subtitle:{
+    fontSize:RFValue(12),
+    fontWeight:'bold',
+    color:colors.light.textModal,
+    textAlign:'center'
   },
-  addButton:{
-    backgroundColor:colors.light.background,
-    width: RFValue(40),
-    height:RFValue(25) ,
-    borderWidth:1,
-    borderColor:colors.light.gray,
-    borderBottomRightRadius:20,
-    borderTopRightRadius:20,
+  button:{
+    width:'100%',
+    borderTopWidth:1,
+    borderTopColor:colors.light.gray,
     alignItems:'center',
-    justifyContent:'center'
+    paddingVertical:RFValue(12),
+  },
+  textButton:{
+    fontWeight:'bold',
+    fontSize:RFValue(12)
   }
 
 })

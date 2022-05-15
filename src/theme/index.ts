@@ -14,7 +14,11 @@ export const colors = {
     white:'#ffffff',
     gray:'#cccccc',
     backgroundModal:'rgba(105, 105, 105, 0.5)',
-    backgroundListCart:'#ece9fe'
+    backgroundListCart:'#ece9fe',
+    titleModal:'#696969',
+    textModal:'#a8a8a8',
+    blue:'#5a9acf',
+    red:'#fd746a'
   
 
       

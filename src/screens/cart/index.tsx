@@ -4,7 +4,7 @@ import { styles } from './styles'
 import { Entypo } from '@expo/vector-icons'
 import { colors } from '~/theme'
 import { RFValue } from 'react-native-responsive-fontsize'
-import { useNavigation } from '@react-navigation/native'
+import { CommonActions, useNavigation } from '@react-navigation/native'
 import { useCart } from '~/hooks/cart'
 import { InfoNotFound } from './components/infoNotFound'
 import { ListItemCart } from '~/components'
@@ -14,21 +14,19 @@ export const Cart: React.FC = () => {
   const navigation = useNavigation()
 
   const {cart, AddProduct, RemoveProduct} = useCart()
-  const data = [{
-  
-    'id': 5,
-    'title': "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-    'price': 695,
-    'description': "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-    'category': 'jewelery',
-    'image': 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
-    'rating': {
-      'rate': 4.6,
-      'count': 400
-    },
-    'quantity':10
-  } ]
 
+  const totalCart =  cart.map((item:any) => item?.total).reduce((prev, curr) => prev + curr, 0)
+
+  const handleBuy = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'success' }
+        ]
+      })
+    )
+  }
 
   const renderItem = ({ item, index }: ListRenderItemInfo<any>) => {
     return  <ListItemCart removeItem={()=> RemoveProduct(item)} data={item} addItem={()=> AddProduct(item)}/>
@@ -52,7 +50,7 @@ export const Cart: React.FC = () => {
       {
         cart.length < 1 && <InfoNotFound/>
       }
-
+      
       {cart.length > 0 &&
      <>
        <FlatList
@@ -65,12 +63,12 @@ export const Cart: React.FC = () => {
      
        <View style={styles.contentValueCart}>
          <Text style={styles.valueText}>Total:</Text>
-         <Text style={styles.valueText}>$404</Text>
+         <Text style={styles.valueText}>${totalCart.toFixed(2)}</Text>
        </View>
        <View style={styles.contentFooter}>
          <TouchableOpacity 
            style={styles.button}
-           // onPress={()=> navigation.navigate('cart' as never)}
+           onPress={()=> handleBuy()}
          >
            <Text style={styles.textButton}>FINALIZAR COMPRA</Text>
          </TouchableOpacity>

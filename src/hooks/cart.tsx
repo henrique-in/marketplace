@@ -18,10 +18,11 @@ import { ModalRemoveItem } from '~/components/modalRemoveItem'
  }
   
   interface CartContextData {
-    cart: [{}];
+    cart: [];
     loading: boolean;
     AddProduct(item?: itemProps): Promise<void>
     RemoveProduct(item?: itemProps): Promise<void>
+    ResetCart(): Promise<void>
 
 
   }
@@ -32,7 +33,7 @@ const CartContext = createContext<CartContextData>({} as CartContextData)
 export const CartProvider: React.FC<Props> = ({children}) => {
   const [data, setData] = useState<any>([])
   const [loading, setLoading] = useState(true)
-  const [modalRemove, setModalRemove] = useState(false)
+  const [modalRemove, setModalRemove] = useState(null)
   
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -52,56 +53,67 @@ export const CartProvider: React.FC<Props> = ({children}) => {
  
 
   const AddProduct = async(item: any) => {
-    const aux = {...item, quantity: 1}
+    const aux = {...item, quantity: 1, total: item.price}
     // console.log(aux)
     if(data.some((e: { id: any }) => e.id === aux.id)){
       const filter = data.filter((d: { id: any }) => d.id === aux.id)
       const otherItems = data.filter((d: { id: any })=> d.id !== aux.id)
       const arrayFilter = [...filter, aux]
       const someQuantity = arrayFilter.map(item => item.quantity).reduce((prev, curr) => prev + curr, 0)
-      const resultSome = {...aux, quantity:someQuantity}
+      const resultSome = {...aux, quantity:someQuantity, total: aux.price*someQuantity}
       
       const result = [...otherItems,resultSome]
+    
       return setData(result.sort((a,b) => a.id - b.id))
       
     }
     const array = [...data, aux]
+  
     return setData(array.sort((a,b) => a.id - b.id))
   }
   
-  const toogleModalRemove = () => {
-    setModalRemove(!modalRemove)
+  const toogleModalRemove = (item: any) => {
+    setModalRemove(item)
   }
 
   const RemoveProduct = async (item:any) => {
       
     if(item.quantity > 1){
       const otherItems = data.filter((d: { id: any })=> d.id !== item.id)
-      const aux = {...item, quantity: item.quantity - 1}
+      const aux = {...item, quantity: item.quantity - 1, total: (item.quantity - 1)*item.price}
 
       const result = [...otherItems, aux]
+
       return setData(result.sort((a,b) => a.id - b.id))
     }
-    if(item.quantity === 1 && modalRemove === true){
+    if(item.quantity === 1 && modalRemove !== null){
       
       const otherItems = data.filter((d: { id: any })=> d.id !== item.id)
-      return setData(otherItems)
+      setData(otherItems)
+      return toogleModalRemove(null)
        
        
     }
-    if(item.quantity === 1 && modalRemove === false) {
-      return toogleModalRemove()
+    if(item.quantity === 1 && modalRemove === null) {
+      return toogleModalRemove(item)
     }
   }
+
+
+  const ResetCart = async() =>{
+    setData([])
+  }
   
- 
+
   
   return (
-    <CartContext.Provider value={{cart: data, loading, AddProduct, RemoveProduct}}>
+    <CartContext.Provider value={{cart: data, loading, AddProduct, RemoveProduct,ResetCart}}>
       {children}
       <ModalRemoveItem
-        isVisible={modalRemove}
-        onClose={()=> toogleModalRemove()}
+        item={modalRemove}
+        isVisible={modalRemove !== null}
+        onClose={()=> toogleModalRemove(null)}
+        confirm={(item: any)=> RemoveProduct(item)}
       />
     </CartContext.Provider>
   )
