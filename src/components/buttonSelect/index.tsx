@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import { RFValue } from 'react-native-responsive-fontsize'
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+
 import { useTheme } from '~/hooks/theme'
 
-import { colors } from '~/theme'
+
 import { styles } from './styles'
 
 

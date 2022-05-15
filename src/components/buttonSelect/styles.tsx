@@ -4,18 +4,17 @@ import { colors } from '~/theme'
 
 export const styles = StyleSheet.create({
   selected: {
-    height:RFValue(34),
+    height:RFValue(40),
     backgroundColor:colors.light.main, 
     borderRadius:RFValue(10),
     alignItems:'center',
     justifyContent:'center',
     paddingHorizontal:RFValue(10),
-    paddingVertical:RFValue(8),
     marginVertical:RFValue(10),
     marginRight:RFValue(15)
   },
   unSelected:{
-    height:RFValue(34),
+    height:RFValue(40),
     backgroundColor:colors.light.white, 
     borderWidth:2,
     borderColor:colors.light.borderUnselectCategory,
@@ -23,7 +22,6 @@ export const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     paddingHorizontal:RFValue(10),
-    paddingVertical:RFValue(8),
     marginVertical:RFValue(10),
     marginRight:RFValue(15)
   },
