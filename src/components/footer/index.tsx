@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   const {theme} =useTheme()
 
   return (
-    <View style={{...styles.footer,backgroundColor:theme.background}}>
+    <View style={{...styles.footer,backgroundColor:theme.backgroundFooter}}>
       <TouchableOpacity 
         style={styles.button}
         onPress={()=> navigation.navigate('cart' as never)}

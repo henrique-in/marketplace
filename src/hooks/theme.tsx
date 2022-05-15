@@ -36,7 +36,8 @@ interface ThemeProps {
   red:string,
   bagIcon: string,
   bagText:string,
-  textListCart: string
+  textListCart: string,
+  backgroundFooter: string
 }
 
 interface ThemeContext {

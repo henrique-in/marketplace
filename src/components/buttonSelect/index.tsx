@@ -3,7 +3,6 @@ import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
 import { useTheme } from '~/hooks/theme'
 
-
 import { styles } from './styles'
 
 

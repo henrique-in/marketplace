@@ -7,7 +7,7 @@ export const colors = {
     terciaryText:'#ffffff',
     TextUnSelectCategory:'rgba(180, 180, 182, 1)',
     borderUnselectCategory:'#e5e5e5',
-    background:'#1c1c1c',
+    background:'rgba(27, 27, 27, 1)',
     white:'#ffffff',
     gray:'#cccccc',
     backgroundModal:'rgba(105, 105, 105, 0.5)',
@@ -18,7 +18,9 @@ export const colors = {
     red:'#fd746a',
     bagIcon:'#BEB5FF',
     bagText:'#FFFFFF',
-    textListCart:'#cccccc'
+    textListCart:'#cccccc',
+    backgroundFooter:'rgba(105, 105, 105, 0.3)',
+    
   },
   light: {
     main: '#8775fd', 
@@ -28,7 +30,7 @@ export const colors = {
     terciaryText:'#ffffff',
     TextUnSelectCategory:'rgba(180, 180, 182, 1)',
     borderUnselectCategory:'#e5e5e5',
-    background:'rgba(248, 248, 248, 1)',
+    background:'rgb(248,248,248)',
     white:'#ffffff',
     gray:'#cccccc',
     backgroundModal:'rgba(105, 105, 105, 0.5)',
@@ -39,7 +41,8 @@ export const colors = {
     red:'#fd746a',
     bagIcon:'#ffffff',
     bagText:'#8775fd',
-    textListCart:'#8775fd'
+    textListCart:'#8775fd',
+    backgroundFooter:'rgb(255, 255, 255)',
   
 
       
