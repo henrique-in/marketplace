@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     borderTopRightRadius:30,
     ...Platform.select({
       android: {
-        elevation: 3,
+        elevation: 10,
       },
       ios: {
         shadowColor: '#000',
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
           width: 2,
           height: 2,
         },
-        shadowOpacity: 0.4,
+        shadowOpacity: 0.5,
         shadowRadius: 3.84,
       },
     }) 

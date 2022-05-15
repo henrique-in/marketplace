@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     borderRadius:20,
     ...Platform.select({
       android: {
-        elevation: 3,
+        elevation: 4,
       },
       ios: {
         shadowColor: '#000',
