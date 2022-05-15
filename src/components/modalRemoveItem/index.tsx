@@ -1,7 +1,8 @@
 import React from 'react'
-import { Modal, View } from 'react-native'
+import { Modal, View ,Text} from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { colors } from '~/theme'
+import { styles } from './styles'
 
 // import { Container } from './styles';
 
@@ -22,9 +23,18 @@ export const ModalRemoveItem: React.FC<Props> = ({isVisible, onClose}) => {
           justifyContent:'center'
         }}>
 
-        <View style={{width:'80%',height:RFValue(160),backgroundColor:colors.light.background}}>
-                
+        <View style={styles.content}>
+          <View>
+            <Text>Remover Item</Text>
+            <Text>Se deseja remover o item do carrinho clique em prosseguir</Text>
+          </View>
+          <View>
+              
+          </View>
+         
         </View>
+
+
 
       </View>
     </Modal>

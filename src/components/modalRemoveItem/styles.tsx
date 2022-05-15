@@ -14,6 +14,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal:RFValue(14),
     marginBottom:RFValue(10)
   },
+  content:{
+    width:'80%',
+    height:RFValue(170),
+    backgroundColor:colors.light.background,
+    borderRadius:15,
+    justifyContent:'center',
+    alignItems:'center'
+  },
   contentImage:{
 
     ...Platform.select({
